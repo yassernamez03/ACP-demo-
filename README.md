@@ -26,7 +26,7 @@ ranked matches → skills gap → tailored resume → cover letter → interview
 | `job_ranker` | CrewAI | `ranking_acp_server.py` | 8002 | Rank jobs vs. the profile; emit scores, concerns, gaps, and a top-job block |
 | `resume_tailor` | CrewAI | `resume_acp_server.py` | 8003 | Tailored resume suggestions for the top job (no fabrication) |
 | `cover_letter_writer` | CrewAI | `cover_letter_acp_server.py` | 8004 | Draft a cover letter for the top job, with `[Placeholders]` |
-| `interview_coach` | Smolagents | `interview_acp_server.py` | 8005 | Interview questions, answer strategies, topics to review, questions to ask |
+| `interview_coach` | CrewAI | `interview_acp_server.py` | 8005 | Interview questions, answer strategies, topics to review, questions to ask |
 
 ```mermaid
 flowchart TD
@@ -37,7 +37,7 @@ flowchart TD
     Client -->|":8002"| Rank["job_ranker<br/>CrewAI"]
     Client -->|":8003"| Resume["resume_tailor<br/>CrewAI"]
     Client -->|":8004"| Cover["cover_letter_writer<br/>CrewAI"]
-    Client -->|":8005"| Interview["interview_coach<br/>Smolagents"]
+    Client -->|":8005"| Interview["interview_coach<br/>CrewAI"]
 
     Profile --> LLM["LLM Provider<br/>(Ollama: qwen2.5)"]
     Rank --> LLM

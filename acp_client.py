@@ -16,6 +16,16 @@ Run order (each step talks to a different ACP server):
 """
 
 import asyncio
+import sys
+
+# Agent output (and this report) contains em-dashes, curly quotes, and bullets that the
+# default Windows console encoding (cp1252) cannot encode -> printing would raise
+# UnicodeEncodeError at the very end, after all six slow agent calls. Force UTF-8 so the
+# consolidated report always prints (and survives being redirected to a log file).
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 import httpx
 from acp_sdk.client import Client

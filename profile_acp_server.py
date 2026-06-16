@@ -26,9 +26,11 @@ server = Server()
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "ollama_chat/qwen2.5:14b")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
-# num_ctx = input context window (Ollama defaults small and would silently truncate the
-# multi-section inputs these agents receive); max_tokens = output length.
-llm = LLM(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL, max_tokens=8192, num_ctx=8192)
+# max_tokens caps the response length. NOTE: this CrewAI version reaches Ollama through its
+# OpenAI-compatible endpoint, which does NOT accept Ollama's num_ctx option (passing it raises
+# "unexpected keyword argument 'num_ctx'"). To enlarge the input context window, set Ollama's
+# OLLAMA_CONTEXT_LENGTH env var instead of passing num_ctx here.
+llm = LLM(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL, max_tokens=8192)
 
 
 @server.agent()
