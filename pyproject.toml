@@ -1,14 +1,17 @@
 [project]
 name = "acp-demo"
 version = "0.1.0"
-description = "Add your description here"
+description = "ACP Multi-Agent Job Search Assistant — CrewAI + Smolagents agents collaborating over ACP"
 readme = "README.md"
-requires-python = ">=3.12"
+# Pinned below 3.14: CrewAI/ChromaDB currently fail on Python 3.14. Use 3.12.
+# Floor is 3.11 (not 3.10) because acp-sdk requires Python >=3.11.
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "acp-sdk>=1.0.3",
     "crewai[tools]>=1.14.7",
     "ddgs>=9.14.4",
     "duckduckgo-search>=8.1.1",
+    "litellm>=1.0.0",
     "ollama>=0.6.2",
     "python-dotenv>=1.2.2",
     "smolagents[litellm]>=1.26.0",
